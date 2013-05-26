@@ -49,16 +49,4 @@ void MainWindow::setupUI(){
 
     this->showMaximized();
 }
-/**
- * @brief This function passes down mouse press events to the maze
- * @param me The mouse press event
- */
-void MainWindow::mousePressEvent(QMouseEvent *me){
-    if(ui->tabWidget->currentIndex() == 0){
-        maze->mousePressEvent(me);
-    }
-    // Fire off a mouse press event to the Mainwindow, otherwise it would
-    // go unnoticed by it
-    QMainWindow::mousePressEvent(me);
 
-}

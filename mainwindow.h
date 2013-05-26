@@ -40,7 +40,6 @@ private:
 
     // Functions
     void setupUI();
-    void mousePressEvent(QMouseEvent *me);
 
 
 };

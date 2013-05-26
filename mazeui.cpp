@@ -3,9 +3,9 @@
  * @brief Creates a new maze solver ui with solving capabilities on a given tab
  * @param QWidget the widget on which to create the UI
  */
-MazeUi::MazeUi(QWidget *newCurrentTab)
+MazeUi::MazeUi(QWidget *parent) : QGraphicsView(parent)
 {
-    currentTab = newCurrentTab;
+    currentTab = parent;
 
     // Fixed height and width
     sceneHeight = 600;
@@ -33,7 +33,6 @@ MazeUi::MazeUi(QWidget *newCurrentTab)
 MazeUi::~MazeUi(){
     delete listOfRectangles;
     delete listOfIds;
-    delete view;
 }
 /**
  * @brief Creates an array for the different sizes of the arrays
@@ -70,11 +69,12 @@ void MazeUi::setupUI(){
     currentTab->setLayout(gridLayout);
 
     // Setting up the graphics view for the rectangles
-    view = new QGraphicsView();
-    view->setGeometry(0,0,sceneWidth,sceneHeight);
+    //view = new QGraphicsView();
+    setGeometry(0,0,sceneWidth,sceneHeight);
+    //view->setGeometry(0,0,sceneWidth,sceneHeight);
     scene = new QGraphicsScene();
-    view->setScene(scene);
-    gridLayout->addWidget(view,0,0,3,1);
+    setScene(scene);
+    gridLayout->addWidget(this,0,0,3,1, Qt::AlignLeft| Qt::AlignTop);
 
     // Setting up Spacers
     QSpacerItem *viewSpacer = new QSpacerItem(10,0);
@@ -335,7 +335,7 @@ void MazeUi::clearMaze()
  * @param me the mousepressevent
  */
 void MazeUi::mousePressEvent(QMouseEvent *me){
-    QGraphicsItem *current = view->itemAt(me->pos().x()-25,me->pos().y()-75); // Transpose them  -- buggy
+    QGraphicsItem *current = itemAt(me->pos());
 
     // Null check
     if(!current){

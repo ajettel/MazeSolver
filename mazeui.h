@@ -28,7 +28,8 @@ class MazeUi :  public QGraphicsView
 {
     Q_OBJECT
 public:
-    MazeUi(QWidget* newCurrentTab);
+    explicit MazeUi(QWidget* parent = 0);
+public slots:
     void mousePressEvent(QMouseEvent *me);
 
 
@@ -38,7 +39,6 @@ private:
     QTextBrowser *log; ///< Log display
     QGridLayout *mazeTabLayout; ///< Layout that holds maze, log and  buttons
     QGraphicsScene *scene; ///< The graphics scene which is being painted on
-    QGraphicsView* view; ///< The view which visualizes the maze
 
     // Buttons
     QPushButton *changeGridSize;
